@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        
+        const root = document.getElementById("root");
+        
+        function App() {
+            const [f, setF] = React.useState(0)
+            const [m, setM] = React.useState()
+            const [a, setA] = React.useState()
+            function caculate(m, a) {
+                let mass = Number(m)
+                let acceleration = Number(a)
+                if (!isNaN(mass) && !isNaN(acceleration) && mass !== 0 && acceleration !== 0) {
+                    setF(mass * acceleration)
+                }
+            }
+
+            const onChangeM = (event) => {
+                setM(event.target.value)
+                caculate(event.target.value, a)
+            }
+            const onChangeA = (event) => {
+                setA(event.target.value)
+                caculate(m, event.target.value)
+            }
+
+            return (
+            <div>
+                <h1>Newton's Second Law</h1>
+
+                <label> F(for Force) = </label>
+                
+                <input value={m} id="M" placeholder="Mass" type="number" onChange={onChangeM}/>
+
+                <label> x </label>
+
+                <input value={a}id="A"placeholder="Acceleration"type="number" onChange={onChangeA}/>
+
+                <h4> Result: F = {f} </h4>
+            </div>
+        )}
+
+        ReactDOM.render(<App />, root);
+    </script>
